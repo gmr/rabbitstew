@@ -13,7 +13,6 @@ Example Use
 
 """
 import argparse
-import copy
 import getpass
 import sys
 import time
@@ -37,8 +36,10 @@ DEFAULT_PASSWORD = 'guest'
 
 
 class RabbitStew(object):
+    """Main Processing Class"""
 
     def __init__(self):
+        """Create a new instance of RabbitStew"""
         self.channel = None
         self.connection = None
         self.counter = 0
@@ -49,6 +50,11 @@ class RabbitStew(object):
         self.password = self.get_password()
 
     def build_argparser(self):
+        """Build the argument parser, adding the arguments, and return it.
+
+        :rtype: argparse.ArgumentParser
+
+        """
         formatter = argparse.ArgumentDefaultsHelpFormatter
         parser = argparse.ArgumentParser(prog='rabbitstew',
                                          description=DESC,
@@ -98,8 +104,8 @@ class RabbitStew(object):
         parser.add_argument('-c',
                             dest='confirm',
                             action='store_true',
-                            help='Confirm delivery of each message, exiting if '
-                                 'a message delivery could not be confirmed')
+                            help='Confirm delivery of each message, exiting if'
+                                 ' a message delivery could not be confirmed')
 
         parser.add_argument('--add-user',
                             action='store_true',
@@ -126,10 +132,15 @@ class RabbitStew(object):
         return parser
 
     def close(self):
+        """Close the RabbitMQ connection"""
         self.connection.close()
         self.log('Closed RabbitMQ connection')
 
     def connect(self):
+        """Connect to RabbitMQ and create the channel. Optionally, enable
+        publisher confirmations based upon cli arguments.
+
+        """
         self.log('Connecting to RabbitMQ')
 
         try:
@@ -147,6 +158,11 @@ class RabbitStew(object):
         self.log('Connected')
 
     def default_properties(self):
+        """Build the default properties dictionary based upon the CLI options
+
+        :rtype: dict
+
+        """
         properties = {'app_id': self.args.app_id}
         if self.args.content_type:
             properties['content_type'] = self.args.content_type
@@ -158,10 +174,22 @@ class RabbitStew(object):
 
     @staticmethod
     def error(message, *args):
+        """Log the message to stderr and exit the app
+
+        :param str message: The message to log
+        :param list args: CLI args for the message
+
+        """
         sys.stderr.write(message % args + '\n')
         sys.exit(1)
 
     def get_password(self):
+        """Get the password from either a prompt for the user, a password file,
+        or the arguments passed in.
+
+        :rtype: str
+
+        """
         if self.args.prompt:
             return getpass.getpass('RabbitMQ password: ')
         if self.args.password_file:
@@ -169,15 +197,32 @@ class RabbitStew(object):
         return self.args.password
 
     def get_properties(self):
-        properties = copy.copy(self.properties)
-        properties['timestamp'] = int(time.time())
-        return properties
+        """Reuse self.properties but set the timestamp to the current value
+        and remove the message_id if set
+
+        :param
+        """
+        self.properties['timestamp'] = int(time.time())
+        if 'message_id' in self.properties:
+            del self.properties['message_id']
+        return self.properties
 
     def log(self, message, *args):
+        """Log the message to stdout
+
+        :param str message: The message to log
+        :param list args: CLI args for the message
+
+        """
         if self.args.verbose:
             sys.stdout.write(message % args + '\n')
 
     def publish(self, line):
+        """Publish the line to RabbitMQ
+
+        :param str line:
+
+        """
         msg = rabbitpy.Message(self.channel,
                                line.rstrip('\r\n'),
                                self.get_properties(),
@@ -194,6 +239,10 @@ class RabbitStew(object):
         self.log('Message #{0} published'.format(self.counter))
 
     def run(self):
+        """Main routine to run, reads in from stdin and publishes out after
+        connecting and ensuring the exchange and routing key are set properly.
+
+        """
         self.connect()
 
         # Is better to show argparser default as None and replace with ''
@@ -231,6 +280,7 @@ class RabbitStew(object):
 
 
 def main():
+    """Entrypoint for the CLI app"""
     stew = RabbitStew()
     stew.run()
 
