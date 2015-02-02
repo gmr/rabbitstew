@@ -8,7 +8,7 @@ messages to RabbitMQ.
 Installation
 ------------
 rabbitstew is available from the `Python Package Index <https://pypi.python.org/pypi/rabbitstew>`_
-and can be installed via pip or easy_install.
+and can be installed via ``pip`` or ``easy_install``.
 
 Usage Example
 -------------
