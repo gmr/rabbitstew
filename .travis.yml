@@ -1,0 +1,31 @@
+sudo: false
+language: python
+python:
+  - 2.6
+  - 2.7
+  - pypy
+  - 3.2
+  - 3.3
+  - 3.4
+install:
+  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then pip install unittest2 argparse --download-cache $HOME/.pip-cache; fi
+  - pip install -r requirements.txt --download-cache $HOME/.pip-cache
+  - pip install -r test-requirements.txt --download-cache $HOME/.pip-cache
+script: nosetests --with-coverage --cover-package=rabbitstew -v -l DEBUG --logging-level=DEBUG
+after_success:
+  - codecov
+services:
+  - rabbitmq
+deploy:
+  distributions: sdist bdist_wheel
+  provider: pypi
+  user: crad
+  on:
+    python: 2.7
+    tags: true
+    all_branches: true
+  password:
+    secure: "aNHNT5H3H2TztkKDmF/aWEANMNG+YxonL4HPSCfixx56xauT8oxShARw47Tb8QvhThhHmJAcwc93N1HwCqqFLxQN6eqGsZgV5ir1RRuJmSzAuxdx1wtVtY67ncBFlGUbH0H7yuwlVOYv3Rs7GA0gArOqSotdSV85Yun8EmuN5Q0="
+cache:
+  directories:
+    - $HOME/.pip-cache/
