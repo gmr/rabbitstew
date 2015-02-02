@@ -10,8 +10,8 @@ import rabbitpy
 
 class TestBasicPublishing(unittest.TestCase):
 
-    INPUT = ['CODE SIGNING: cs_invalid_page(0x10fa17000): p=85310[python]',
-             'CODE SIGNING: cs_invalid_page(0x1061ca000): p=85314[python]']
+    INPUT = [b'CODE SIGNING: cs_invalid_page(0x10fa17000): p=85310[python]',
+             b'CODE SIGNING: cs_invalid_page(0x1061ca000): p=85314[python]']
 
     def setUp(self):
         self.connection = rabbitpy.Connection()
