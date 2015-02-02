@@ -33,16 +33,16 @@ class TestBasicPublishing(unittest.TestCase):
         self.assertEqual(msg.body, self.INPUT[iteration])
         self.assertEqual(msg.properties['app_id'], b'rabbitstew')
         self.assertAlmostEqual(self.get_epoch(msg.properties['timestamp']),
-                               start_time)
+                               start_time, places=0)
 
     def get_command(self):
         return ['python', 'rabbitstew.py', '-r', self.queue.name]
 
     def get_epoch(self, value):
-        return float(int(value.strftime('%s')) / 100)
+        return int(value.strftime('%s')) / 100
 
     def test_publishing_messages(self):
-        start_time = float(int(time.time()) / 100)
+        start_time = int(time.time()) / 100
         process = subprocess.Popen(self.get_command(), stdin=subprocess.PIPE)
         process.communicate(input=self.input)
         process.wait()
@@ -73,7 +73,7 @@ class TestPublishingWithProperties(TestBasicPublishing):
         self.assertIsNotNone(msg.properties['message_id'])
         self.assertEqual(msg.properties['message_type'], b'test')
         self.assertAlmostEqual(self.get_epoch(msg.properties['timestamp']),
-                               start_time)
+                               start_time, places=0)
         self.assertEqual(msg.properties['user_id'], b'guest')
 
 
