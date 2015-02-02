@@ -223,7 +223,7 @@ class RabbitStew(object):
         """
         scheme = 'amqps' if self.args.ssl else 'amqp'
         virtual_host = urllib.quote(self.args.vhost, '')
-        return '{0}://{1}:{2}@{3}:{4}:{5}'.format(scheme,
+        return '{0}://{1}:{2}@{3}:{4}/{5}'.format(scheme,
                                                   self.args.user,
                                                   self.password,
                                                   self.args.host,
