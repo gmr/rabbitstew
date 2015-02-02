@@ -178,7 +178,7 @@ class RabbitStew(object):
 
     def publish(self, line):
         msg = rabbitpy.Message(self.channel,
-                               line,
+                               line.rstrip('\r\n'),
                                self.get_properties(),
                                opinionated=self.args.auto_id)
         if self.args.confirm:
