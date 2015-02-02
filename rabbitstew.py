@@ -39,13 +39,14 @@ DEFAULT_PASSWORD = 'guest'
 class RabbitStew(object):
 
     def __init__(self):
-        self.parser = self.build_argparser()
-        self.args = None
         self.channel = None
         self.connection = None
         self.counter = 0
-        self.password = None
         self.properties = {}
+
+        self.parser = self.build_argparser()
+        self.args = self.parser.parse_args()
+        self.password = self.get_password()
 
     def build_argparser(self):
         formatter = argparse.ArgumentDefaultsHelpFormatter
@@ -193,8 +194,6 @@ class RabbitStew(object):
         self.log('Message #{0} published'.format(self.counter))
 
     def run(self):
-        self.args = self.parser.parse_args()
-        self.password = self.get_password()
         self.connect()
 
         # Is better to show argparser default as None and replace with ''
