@@ -3,6 +3,13 @@ rabbitstew
 A small command-line tool that adheres to the Unix philospohy for publishing
 messages to RabbitMQ.
 
+|Version| |Downloads| |Status| |Coverage| |License|
+
+Installation
+------------
+rabbitstew is available from the `Python Package Index <https://pypi.python.org/pypi/rabbitstew>`_
+and can be installed via pip or easy_install.
+
 Usage Example
 -------------
 
@@ -48,17 +55,17 @@ CLI Options
 Version History
 ---------------
 
- - 0.1.0 - released *2015-02-02*
-  - Initial Release
+- 0.1.0 - released *2015-02-02*
+    - Initial Release
 
 .. |Version| image:: https://badge.fury.io/py/rabbitstew.svg?
    :target: http://badge.fury.io/py/rabbitstew
 
-.. |Status| image:: https://travis-ci.org/AWeber/rabbitstew.svg?branch=master
-   :target: https://travis-ci.org/AWeber/rabbitstew
+.. |Status| image:: https://travis-ci.org/gmr/rabbitstew.svg?branch=master
+   :target: https://travis-ci.org/gmr/rabbitstew
 
-.. |Coverage| image:: https://codecov.io/github/AWeber/rabbitstew/coverage.svg?branch=master
-   :target: https://codecov.io/github/AWeber/rabbitstew?branch=master
+.. |Coverage| image:: https://codecov.io/github/gmr/rabbitstew/coverage.svg?branch=master
+   :target: https://codecov.io/github/gmr/rabbitstew?branch=master
 
 .. |Downloads| image:: https://pypip.in/d/rabbitstew/badge.svg?
    :target: https://pypi.python.org/pypi/rabbitstew
