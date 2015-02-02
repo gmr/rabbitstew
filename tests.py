@@ -1,3 +1,4 @@
+import io
 import subprocess
 try:
     import unittest2 as unittest
@@ -22,8 +23,9 @@ class TestBasicPublishing(unittest.TestCase):
 
     def test_publishing_messages(self):
         cmd = ['python', 'rabbitstew.py', '-r', self.queue.name]
+        input = b'\n'.join(self.INPUT) + b'\n'
         process = subprocess.Popen(cmd, stdin=subprocess.PIPE)
-        process.communicate(input='\n'.join(self.INPUT) + '\n')
+        process.communicate(input=input)
         process.wait()
         self.assertEqual(0, process.returncode)
         msg = self.queue.get(False)
