@@ -3,7 +3,7 @@ rabbitstew
 A small command-line tool that adheres to the Unix philospohy for publishing
 messages to RabbitMQ.
 
-|Version| |Downloads| |Status| |Coverage| |License|
+|Version| |Downloads| |Status| |License|
 
 Installation
 ------------
@@ -63,9 +63,6 @@ Version History
 
 .. |Status| image:: https://travis-ci.org/gmr/rabbitstew.svg?branch=master
    :target: https://travis-ci.org/gmr/rabbitstew
-
-.. |Coverage| image:: https://codecov.io/github/gmr/rabbitstew/coverage.svg?branch=master
-   :target: https://codecov.io/github/gmr/rabbitstew?branch=master
 
 .. |Downloads| image:: https://pypip.in/d/rabbitstew/badge.svg?
    :target: https://pypi.python.org/pypi/rabbitstew
