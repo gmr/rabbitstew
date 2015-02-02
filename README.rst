@@ -3,6 +3,11 @@ rabbitstew
 A small command-line tool that adheres to the Unix philospohy for publishing
 messages to RabbitMQ.
 
+``rabbitstew`` takes input from ``stdin`` and publishes a message per line
+received. You can customize the exchange and routing key used, along with
+message properties. Additionally, you can enable publisher confirmations if
+desired.
+
 |Version| |Downloads| |Status| |License|
 
 Installation
