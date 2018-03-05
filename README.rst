@@ -8,7 +8,7 @@ received. You can customize the exchange and routing key used, along with
 message properties. Additionally, you can enable publisher confirmations if
 desired.
 
-|Version| |Downloads| |Status| |License|
+|Version| |Status|
 
 Installation
 ------------
@@ -64,13 +64,7 @@ Version History
     - Initial Release
 
 .. |Version| image:: https://badge.fury.io/py/rabbitstew.svg?
-   :target: http://badge.fury.io/py/rabbitstew
+   :target: https://img.shields.io/pypi/v/rabbitstew.svg?
 
 .. |Status| image:: https://travis-ci.org/gmr/rabbitstew.svg?branch=master
    :target: https://travis-ci.org/gmr/rabbitstew
-
-.. |Downloads| image:: https://pypip.in/d/rabbitstew/badge.svg?
-   :target: https://pypi.python.org/pypi/rabbitstew
-
-.. |License| image:: https://pypip.in/license/rabbitstew/badge.svg?
-   :target: https://rabbitstew.readthedocs.org
